@@ -1,8 +1,40 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { render } from 'react-dom';
+import { ApolloProvider } from 'react-apollo';
+import ApolloClient from "apollo-boost";
+import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import registerServiceWorker from './registerServiceWorker';
+import App from './App';
+
+const httpLink = createHttpLink({
+  uri: 'https://treee-service.herokuapp.com/'
+});
+
+const authLink = setContext((_, { headers }) => {
+  //const token = localStorage.getItem('blaze-auth-token');
+  return {
+    headers: {
+      ...headers,
+      //authorization: token ? `Bearer ${token}` : null,
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
+render(
+  <ApolloProvider client={client}>
+    <Router>
+      <App />
+    </Router>
+  </ApolloProvider>,
+  document.getElementById('root'),
+);
 registerServiceWorker();
