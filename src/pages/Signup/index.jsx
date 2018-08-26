@@ -302,11 +302,11 @@ class Signup extends Component
                 <p>Tell us more about you...</p>
                 <hr />
                 <label for="name"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="name" disabled />
+                <input type="text" placeholder="Enter Name" value={this.state.name} name="name" disabled />
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" disabled />
+                <input type="text" placeholder="Enter Email" value={this.state.email} name="email" disabled />
                 <label for="mobile"><b>Mobile</b></label>
-                <input type="number" placeholder="Enter Mobile No." name="mobile" disabled />
+                <input type="number" placeholder="Enter Mobile No." value={this.state.phone} name="mobile" disabled />
                 <hr />
                 <label for="age"><b>Age</b></label>
                 <input type="number" placeholder="Enter Age." value={this.state.age} name="age" autoFocus onChange={(e) => {
