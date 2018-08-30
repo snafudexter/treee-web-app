@@ -420,17 +420,18 @@ class Signup extends Component
 
     render() {
 
+
         if(this.state.step == '1')
-            return (<div className="with_bg">{this.renderStep1()} <Alert stack={{limit: 3}} /></div>)
+            return (<div className="parent">{this.renderStep1()} <Alert stack={{limit: 3}} /></div>)
 
         if(this.state.step == '2')
-            return (<div>{this.renderStep2()} <Alert stack={{limit: 3}} /> </div>)
+            return (<div className="parent">{this.renderStep2()} <Alert stack={{limit: 3}} /> </div>)
 
         if(this.state.step == '3')
-            return (<div>{this.renderStep3()} <Alert stack={{limit: 3}} /> </div>)
+            return (<div className="parent">{this.renderStep3()} <Alert stack={{limit: 3}} /> </div>)
         
         if(this.state.step == '4')
-            return (<div>{this.renderStep4()} <Alert stack={{limit: 3}} /> </div>)
+            return (<div className="parent">{this.renderStep4()} <Alert stack={{limit: 3}} /> </div>)
     }
 }
 
