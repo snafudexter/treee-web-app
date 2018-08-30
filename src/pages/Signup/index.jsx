@@ -84,12 +84,10 @@ class Signup extends Component
     renderStep1 = () =>
     {
         return (<div>
-            <div class="right">
-            </div>
 
             <Mutation mutation={REGISTER}>
             {(register, { data }) => (
-                <div id="id01" className="modal">
+                <div id="id01" className="modal parent">
             
             <form className="modal-content" onSubmit={(e) => {
                 e.preventDefault();
@@ -142,7 +140,7 @@ class Signup extends Component
     }
 
     renderStep2 = () => {
-        return (<div>
+        return (<div className="parent">
             <div class="right">
             </div>
             <Mutation mutation={CONFIRM_OTP}>
@@ -189,7 +187,7 @@ class Signup extends Component
     }
 
     renderStep3 = () => {
-        return (<div>
+        return (<div className="parent">
             <div class="right">
             </div>
             <Mutation mutation={UPDATE_DATA}>
@@ -420,18 +418,17 @@ class Signup extends Component
 
     render() {
 
-
         if(this.state.step == '1')
-            return (<div className="parent">{this.renderStep1()} <Alert stack={{limit: 3}} /></div>)
+            return (<div>{this.renderStep1()} <Alert stack={{limit: 3}} /></div>)
 
         if(this.state.step == '2')
-            return (<div className="parent">{this.renderStep2()} <Alert stack={{limit: 3}} /> </div>)
+            return (<div>{this.renderStep2()} <Alert stack={{limit: 3}} /> </div>)
 
         if(this.state.step == '3')
-            return (<div className="parent">{this.renderStep3()} <Alert stack={{limit: 3}} /> </div>)
+            return (<div>{this.renderStep3()} <Alert stack={{limit: 3}} /> </div>)
         
         if(this.state.step == '4')
-            return (<div className="parent">{this.renderStep4()} <Alert stack={{limit: 3}} /> </div>)
+            return (<div>{this.renderStep4()} <Alert stack={{limit: 3}} /> </div>)
     }
 }
 
