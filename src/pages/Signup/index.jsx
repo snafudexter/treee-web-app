@@ -69,7 +69,7 @@ class Signup extends Component
 {
     state = {
         id:"cjlarb4hbfb0d0b46fggw6vmy",
-        step: 1,
+        step: 3,
         qualification: '',
         gender: '',
         classes: [],
@@ -140,11 +140,9 @@ class Signup extends Component
     }
 
     renderStep2 = () => {
-        return (<div className="parent">
-            <div class="right">
-            </div>
+        return (<div>
             <Mutation mutation={CONFIRM_OTP}>
-            {(confirmOTP, { data }) => (<div id="id01" class="modal">
+            {(confirmOTP, { data }) => (<div id="id01" class="modal parent">
             
             <form class="modal-content" onSubmit={(e) => {
                 e.preventDefault();
@@ -187,9 +185,8 @@ class Signup extends Component
     }
 
     renderStep3 = () => {
-        return (<div className="parent">
-            <div class="right">
-            </div>
+        return (<div>
+
             <Mutation mutation={UPDATE_DATA}>
             {(updateUserData, { data }) => (
             <div id="id01" class="modal">
