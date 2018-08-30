@@ -69,7 +69,7 @@ class Signup extends Component
 {
     state = {
         id:"cjlarb4hbfb0d0b46fggw6vmy",
-        step: 3,
+        step: 1,
         qualification: '',
         gender: '',
         classes: [],
