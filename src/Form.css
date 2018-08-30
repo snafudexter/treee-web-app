@@ -1,4 +1,7 @@
-body {font-family: Arial, Helvetica, sans-serif;}
+body {font-family: Arial, Helvetica, sans-serif;
+    background: url("./Infographic1.PNG");
+    background-size: 100vw 100vh;
+}
 * {box-sizing: border-box;}
 
 /* Full-width input fields */
@@ -64,15 +67,13 @@ button:hover {
     height: 100vh; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     /*background-color: #474e5d; */
-    background-color: #fff;
     padding-top: 50px;
 }
 
 /* Modal Content/Box */
 .modal-content {
     float: right;
-    background-color: #fefefe;
-    margin: 12% 2% 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    margin: auto; /* 5% from the top, 15% from the bottom and centered */
     width: 30%; /* Could be more or less, depending on screen size */
 }
 
@@ -89,7 +90,6 @@ hr {
     top: 15px;
     font-size: 40px;
     font-weight: bold;
-    color: #f1f1f1;
 }
 
 .close:hover,
@@ -159,4 +159,9 @@ hr {
   }
   .select-items div:hover, .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .with_bg  
+  {
+      background-image: url('Infographic1.PNG')
   }
