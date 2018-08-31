@@ -91,7 +91,7 @@ class Signup extends Component
             'width': '100%',
             'height': '100%'}}>
 
-            <div className="col-lg-8 col-md-7 col-sm-12">
+            <div className="col-md-7 col-sm-12">
 
             <div style={{marginTop: '-15%', marginBottom: '1px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
             <div className="logo">
@@ -99,7 +99,7 @@ class Signup extends Component
             </div>
             <Mutation mutation={REGISTER}>
             {(register, { data }) => (
-            <form style={{background: '#fff',padding: '5%', borderRadius: '10px'}} className="shadow-lg align-self-center" onSubmit={(e) => {
+            <form style={{background: '#fff',padding: '5%', borderRadius: '10px', width: '50%'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
                 register({variables:{name: this.state.name, email: this.state.email, phone: this.state.number}}).then((resp)=> {
                     this.setState({step:2, id: resp.data.register.id})
