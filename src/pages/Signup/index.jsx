@@ -91,7 +91,7 @@ class Signup extends Component
             'width': '100%',
             'height': '100%'}}>
 
-            <div className="col-md-4 col-sm-12">
+            <div className="col-md-5 col-sm-12">
 
             <div style={{marginTop: '-15%', marginBottom: '1px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
             <div className="logo">
