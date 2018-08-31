@@ -144,6 +144,7 @@ class Signup extends Component
                 }}/>
                 </div>  
 
+                    <hr />
                     <button className="btn btn-primary btn-block" type="submit">Send OTP</button>
 
             </form>
