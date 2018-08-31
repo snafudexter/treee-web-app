@@ -87,13 +87,13 @@ class Signup extends Component
             'align-items': 'center',
             '-webkit-box-pack': 'center',
             'justify-content': 'center',
-            'padding-top': '20px',
+            margin: 'auto',
             'width': '100%',
             'height': '100%'}}>
 
-            <div className="col-4">
+            <div className="col-md-4 col-sm-12">
 
-            <div style={{marginTop: '48px', marginBottom: '48px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <div style={{marginTop: '-15%', marginBottom: '1px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
             <div className="logo">
                 <img src="logo.png" width="70px" height="70px"/>    
             </div>
