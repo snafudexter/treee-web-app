@@ -1,5 +1,4 @@
 import React,{ Component} from 'react';
-import '../../Form.css'
 import Select from 'react-select';
 import gql from "graphql-tag";
 import Alert from 'react-s-alert';
@@ -83,13 +82,24 @@ class Signup extends Component
     }
     renderStep1 = () =>
     {
-        return (<div>
+        return (<div className="row justify-content-center" style={{display: 'flex',
+            '-webkit-box-align': 'center',
+            'align-items': 'center',
+            '-webkit-box-pack': 'center',
+            'justify-content': 'center',
+            'padding-top': '20px',
+            'width': '100%',
+            'height': '100%'}}>
 
+            <div className="col-4">
+
+            <div style={{marginTop: '48px', marginBottom: '48px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <div className="logo">
+                <img src="logo.png" width="70px" height="70px"/>    
+            </div>
             <Mutation mutation={REGISTER}>
             {(register, { data }) => (
-                <div id="id01" className="modal parent">
-            
-            <form className="modal-content" onSubmit={(e) => {
+            <form style={{background: '#fff',padding: '10%', borderRadius: '10px'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
                 register({variables:{name: this.state.name, email: this.state.email, phone: this.state.number}}).then((resp)=> {
                     this.setState({step:2, id: resp.data.register.id})
@@ -110,32 +120,37 @@ class Signup extends Component
 
                 })
             }} >
-                <div className="container">
-                <h1>Step 1</h1>
+                <h2>Step 1</h2>
                 <p>Please fill in this form.</p>
                 <hr />
+                
+                <div className="form-group">
                 <label for="name"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" value={this.state.name} name="name" required onChange={(e) => {
+                <input className="form-control" type="text" placeholder="Enter Name" value={this.state.name} name="name" required onChange={(e) => {
                     this.setState({name: e.target.value})
                 }}/>
+                </div>
+                <div className="form-group">
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" value={this.state.email} name="email" required onChange={(e) => {
+                <input className="form-control" type="text" placeholder="Enter Email" value={this.state.email} name="email" required onChange={(e) => {
                     this.setState({email: e.target.value})
                 }}/>
+                </div>
+
+                <div className="form-group">
                 <label for="mobile"><b>Mobile</b></label>
-                <input type="number" placeholder="Enter Mobile No." value={this.state.number} name="mobile" required onChange={(e) => {
+                <input className="form-control" type="number" placeholder="Enter Mobile No." value={this.state.number} name="mobile" required onChange={(e) => {
                     this.setState({number: e.target.value})
                 }}/>
+                </div>  
 
-                <div className="clearfix">
-                    <button type="submit" className="signupbtn">Send OTP</button>
-                </div>
-                </div>
+                    <button className="btn btn-primary btn-block" type="submit">Send OTP</button>
+
             </form>
-            </div>
             )}
             </Mutation>
-            
+            </div>
+            </div>
     </div>);
     }
 
@@ -301,7 +316,7 @@ class Signup extends Component
                 <label for="email"><b>Email</b></label>
                 <input type="text" placeholder="Enter Email" value={this.state.email} name="email" disabled />
                 <label for="mobile"><b>Mobile</b></label>
-                <input type="number" placeholder="Enter Mobile No." value={this.state.phone} name="mobile" disabled />
+                <input type="number" placeholder="Enter Mobile No." value={this.state.number} name="mobile" disabled />
                 <hr />
                 <label for="age"><b>Age</b></label>
                 <input type="number" placeholder="Enter Age." value={this.state.age} name="age" autoFocus onChange={(e) => {
@@ -416,16 +431,16 @@ class Signup extends Component
     render() {
 
         if(this.state.step == '1')
-            return (<div>{this.renderStep1()} <Alert stack={{limit: 3}} /></div>)
+            return (<div className="container h-100">{this.renderStep1()} <Alert stack={{limit: 3}} /></div>)
 
         if(this.state.step == '2')
-            return (<div>{this.renderStep2()} <Alert stack={{limit: 3}} /> </div>)
+            return (<div className="container h-100">{this.renderStep2()} <Alert stack={{limit: 3}} /> </div>)
 
         if(this.state.step == '3')
-            return (<div>{this.renderStep3()} <Alert stack={{limit: 3}} /> </div>)
+            return (<div className="container h-100">{this.renderStep3()} <Alert stack={{limit: 3}} /> </div>)
         
         if(this.state.step == '4')
-            return (<div>{this.renderStep4()} <Alert stack={{limit: 3}} /> </div>)
+            return (<div className="container h-100">{this.renderStep4()} <Alert stack={{limit: 3}} /> </div>)
     }
 }
 

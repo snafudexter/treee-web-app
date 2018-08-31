@@ -26,3 +26,24 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+body{
+  background-color: #bcd6ff;
+}
+
+.logo{
+  width: 85px;
+    height: 85px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background: white;
+    border-radius: 100%;
+    /* border-width: 1px; */
+    transform: translateY(50%);
+    /* border-style: solid; */
+    /* border-color: rgba(0, 0, 0, 0.2); */
+    border-image: initial;
+}
