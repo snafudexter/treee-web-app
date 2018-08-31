@@ -99,7 +99,7 @@ class Signup extends Component
             </div>
             <Mutation mutation={REGISTER}>
             {(register, { data }) => (
-            <form style={{background: '#fff',padding: '10%', borderRadius: '10px'}} className="shadow-lg align-self-center" onSubmit={(e) => {
+            <form style={{background: '#fff',padding: '5%', borderRadius: '10px'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
                 register({variables:{name: this.state.name, email: this.state.email, phone: this.state.number}}).then((resp)=> {
                     this.setState({step:2, id: resp.data.register.id})
