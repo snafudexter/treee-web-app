@@ -82,24 +82,17 @@ class Signup extends Component
     }
     renderStep1 = () =>
     {
-        return (<div className="row justify-content-center" style={{display: 'flex',
-            '-webkit-box-align': 'center',
-            'align-items': 'center',
-            '-webkit-box-pack': 'center',
-            'justify-content': 'center',
-            margin: 'auto',
-            'width': '100%',
-            'height': '100%'}}>
+        return (<div className="row h-100 justify-content-center align-items-center">
 
-            <div className="col-md-9 col-sm-12">
+            <div className="col-md-6 col-sm-12">
 
-            <div style={{marginTop: '-15%', marginBottom: '1px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'}}>
             <div className="logo">
                 <img src="logo.png" width="70px" height="70px"/>    
             </div>
             <Mutation mutation={REGISTER}>
             {(register, { data }) => (
-            <form style={{background: '#fff',padding: '5%', borderRadius: '10px'}} className="shadow-lg align-self-center" onSubmit={(e) => {
+            <form style={{background: '#fff',padding: '5%', borderRadius: '10px', width:'100%'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
                 register({variables:{name: this.state.name, email: this.state.email, phone: this.state.number}}).then((resp)=> {
                     this.setState({step:2, id: resp.data.register.id})
@@ -156,11 +149,19 @@ class Signup extends Component
     }
 
     renderStep2 = () => {
-        return (<div>
+        return (
+            <div className="row h-100 justify-content-center align-items-center">
+
+            <div className="col-md-6 col-sm-12">
+
+            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'}}>
+            <div className="logo">
+                <img src="logo.png" width="70px" height="70px"/>    
+            </div>
             <Mutation mutation={CONFIRM_OTP}>
-            {(confirmOTP, { data }) => (<div id="id01" class="modal parent">
+            {(confirmOTP, { data }) => (
             
-            <form class="modal-content" onSubmit={(e) => {
+            <form style={{background: '#fff',padding: '5%', borderRadius: '10px', width: '100%'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
                 confirmOTP({variables:{id: this.state.id, otp: this.state.otp}}).then((resp)=> {
                     this.setState({step:3})
@@ -180,34 +181,40 @@ class Signup extends Component
                     });
                 })
             }}>
-                <div class="container">
-                <h1>Step 2</h1>
+                <h2>Step 2</h2>
                 <p>Please Confirm OTP.</p>
                 <hr />
+                <div className="form-group">
                 <label for="email"><b>OTP</b></label>
-                <input type="number" placeholder="Enter OTP." value={this.state.otp} name="otp" required onChange={(e) => {
+                <input className="form-control" type="number" placeholder="Enter OTP." value={this.state.otp} name="otp" required onChange={(e) => {
                     this.setState({otp: e.target.value})
                 }}/>
+                </div>
 
-                <div class="clearfix">
-                    <button type="submit" class="signupbtn">Confirm OTP</button>
-                </div>
-                </div>
-            </form>
-            </div>)}
+                <hr />
+                    <button type="submit" className="btn btn-primary btn-block">Confirm OTP</button>
+
+            </form>)}
             </Mutation>
-            
+            </div>
+            </div>
     </div>);
     }
 
     renderStep3 = () => {
-        return (<div>
+        return (<div className="row h-100 justify-content-center">
+
+        <div className="col-md-6 col-sm-12">
+
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', marginTop: '10px'}}>
+        <div className="logo">
+            <img src="logo.png" width="70px" height="70px"/>    
+        </div>
 
             <Mutation mutation={UPDATE_DATA}>
             {(updateUserData, { data }) => (
-            <div id="id01" class="modal">
-            
-            <form class="modal-content" onSubmit={(e) => {
+        
+            <form style={{background: '#fff',padding: '5%', borderRadius: '10px', width: '100%'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
 
                 var error = false;
@@ -307,22 +314,37 @@ class Signup extends Component
                     console.log(err)
 
                 })
-            }} style={{marginTop:"1%"}}>
-                <div class="container">
-                <h1>Step 3</h1>
+            }} >
+                
+                <h2>Step 3</h2>
                 <p>Tell us more about you...</p>
                 <hr />
+
+                <div className="form-group">
                 <label for="name"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" value={this.state.name} name="name" disabled />
+                <input className="form-control" type="text" placeholder="Enter Name" value={this.state.name} name="name" disabled />
+                </div>
+
+                <div className="form-group">
                 <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" value={this.state.email} name="email" disabled />
+                <input className="form-control" type="text" placeholder="Enter Email" value={this.state.email} name="email" disabled />
+                </div>
+
+                 <div className="form-group">
                 <label for="mobile"><b>Mobile</b></label>
-                <input type="number" placeholder="Enter Mobile No." value={this.state.number} name="mobile" disabled />
+                <input className="form-control" type="number" placeholder="Enter Mobile No." value={this.state.number} name="mobile" disabled />
+                </div>
+
                 <hr />
+
+                <div className="form-group">
                 <label for="age"><b>Age</b></label>
-                <input type="number" placeholder="Enter Age." value={this.state.age} name="age" autoFocus onChange={(e) => {
+                <input className="form-control" type="number" placeholder="Enter Age." value={this.state.age} name="age" autoFocus onChange={(e) => {
                     this.setState({age: e.target.value})
                 }}/>
+                </div>
+
+                <div className="form-group">
                 <label for="gender"><b>Gender</b></label>
                 <Select
                     value={this.state.gender}
@@ -330,7 +352,11 @@ class Signup extends Component
                     options={[{value: "M", label: "Male" },
                     {value: "F", label: "Female" }]}
                 />
+                </div>
+
                 <hr />
+
+                <div className="form-group">
                 <label for="qual"><b>Qualification</b></label>
                 <Query query={QUALIFICATION}>
                     {({ loading, error, data }) => {
@@ -348,13 +374,18 @@ class Signup extends Component
                     );
                     }}
                 </Query>
-                <hr />
+                </div>
 
+                <hr />
+                
+                <div className="form-group">
                 <label for="exp"><b>Tutoring Experience</b></label>
-                <input type="number" placeholder="Enter Experience." name="exp" value={this.state.exp} onChange={(e) => {
+                <input className="form-control"  type="number" placeholder="Enter Experience." name="exp" value={this.state.exp} onChange={(e) => {
                     this.setState({exp: e.target.value})
                 }}/>
+                </div>
 
+                <div className="form-group">
                 <label for="ct"><b>Profession</b></label>
                 <br />
 
@@ -374,9 +405,11 @@ class Signup extends Component
                     );
                     }}
                 </Query>
+                </div>
 
                 <hr />
 
+                <div className="form-group">
                 <label for="ct"><b>Classes Taught</b></label>
                 <br />
 
@@ -397,21 +430,24 @@ class Signup extends Component
                     );
                     }}
                 </Query>
+                </div>
                 
                 <hr />
 
+                <div className="form-group">
                 <label for="price"><b>Price for 12 Tuition Classes</b></label>
-                <input type="number" placeholder="Enter Price." value={this.state.price} name="price" onChange={(e) => {
+                <input className="form-control" type="number" placeholder="Enter Price." value={this.state.price} name="price" onChange={(e) => {
                     this.setState({price: e.target.value})
                 }}/>
+                </div>
 
-                <div class="clearfix">
-                    <button type="submit" class="signupbtn">Register</button>
-                </div>
-                </div>
-            </form>
-            </div>)}
+                <hr />
+                <button type="submit" className="btn btn-primary btn-block">Register</button>
+               
+            </form>)}
             </Mutation>
+            </div>
+            </div>
     </div>);
     }
 
