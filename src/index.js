@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 
 const httpLink = createHttpLink({
-  uri: 'https://treee-service.herokuapp.com/'
+  uri: 'https://treee-service.now.sh/'
 });
 
 const authLink = setContext((_, { headers }) => {

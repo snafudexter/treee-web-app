@@ -68,7 +68,7 @@ class Signup extends Component
 {
     state = {
         id:"cjlarb4hbfb0d0b46fggw6vmy",
-        step: 1,
+        step: 4,
         qualification: '',
         gender: '',
         classes: [],
@@ -452,16 +452,18 @@ class Signup extends Component
     }
 
     renderStep4 = () => {
-        return (<div>
-        <div class="right">
-            </div>
-        <div id="id01" class="modal" >
-        
-        <div className="modal-content" style={{width: "30%", height: "30%"}}>
+        return (<div className="row h-100 justify-content-center">
+
+        <div className="col-md-6 col-sm-12">
+
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', marginTop: '10px'}}>
+        <div className="logo">
+            <img src="logo.png" width="70px" height="70px"/>    
+        </div>
         <h1>Thank you!</h1>
         <h4>We will get back to you shortly</h4>
+
         </div>
-        
         </div></div>)
     }
 
