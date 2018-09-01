@@ -68,7 +68,7 @@ class Signup extends Component
 {
     state = {
         id:"cjlarb4hbfb0d0b46fggw6vmy",
-        step: 4,
+        step: 1,
         qualification: '',
         gender: '',
         classes: [],
@@ -86,7 +86,7 @@ class Signup extends Component
 
             <div className="col-md-6 col-sm-12">
 
-            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'}}>
+            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', marginBottom: '50px'}}>
             <div className="logo">
                 <img src="logo.png" width="70px" height="70px"/>    
             </div>
@@ -119,20 +119,20 @@ class Signup extends Component
                 
                 <div className="form-group">
                 <label for="name"><b>Name</b></label>
-                <input className="form-control" type="text" placeholder="Enter Name" value={this.state.name} name="name" required onChange={(e) => {
+                <input className="form-control" type="text" placeholder="Example: John Doe" value={this.state.name} name="name" required onChange={(e) => {
                     this.setState({name: e.target.value})
                 }}/>
                 </div>
                 <div className="form-group">
                 <label for="email"><b>Email</b></label>
-                <input className="form-control" type="text" placeholder="Enter Email" value={this.state.email} name="email" required onChange={(e) => {
+                <input className="form-control" type="text" placeholder="Example: xxx@xyz.com" value={this.state.email} name="email" required onChange={(e) => {
                     this.setState({email: e.target.value})
                 }}/>
                 </div>
 
                 <div className="form-group">
                 <label for="mobile"><b>Mobile</b></label>
-                <input className="form-control" type="number" placeholder="Enter Mobile No." value={this.state.number} name="mobile" required onChange={(e) => {
+                <input className="form-control" type="number" placeholder="Example: 99999 99999" value={this.state.number} name="mobile" required onChange={(e) => {
                     this.setState({number: e.target.value})
                 }}/>
                 </div>  
@@ -206,7 +206,7 @@ class Signup extends Component
 
         <div className="col-md-6 col-sm-12">
 
-        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', marginTop: '10px'}}>
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', marginTop: '10px', marginBottom: '50px'}}>
         <div className="logo">
             <img src="logo.png" width="70px" height="70px"/>    
         </div>
@@ -214,7 +214,7 @@ class Signup extends Component
             <Mutation mutation={UPDATE_DATA}>
             {(updateUserData, { data }) => (
         
-            <form style={{background: '#fff',padding: '5%', borderRadius: '10px', width: '100%'}} className="shadow-lg align-self-center" onSubmit={(e) => {
+            <form style={{background: '#fff',padding: '5%', borderRadius: '10px', width: '100%', overflow: 'auto'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
 
                 var error = false;
@@ -452,17 +452,18 @@ class Signup extends Component
     }
 
     renderStep4 = () => {
-        return (<div className="row h-100 justify-content-center">
+        return (<div className="row h-100 align-items-center justify-content-center text-center">
 
         <div className="col-md-6 col-sm-12">
 
-        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', marginTop: '10px'}}>
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', marginBottom: '50px'}}>
         <div className="logo">
             <img src="logo.png" width="70px" height="70px"/>    
         </div>
+        <div  style={{background: '#fff',padding: '5%',paddingTop:'40px', borderRadius: '10px', width:'100%'}} className="shadow-lg align-self-center" >
         <h1>Thank you!</h1>
         <h4>We will get back to you shortly</h4>
-
+        </div>
         </div>
         </div></div>)
     }
