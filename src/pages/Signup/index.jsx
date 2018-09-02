@@ -23,6 +23,16 @@ const CONFIRM_OTP = gql`
     }
 `;
 
+const RESEND_OTP = gql`
+    mutation resendOTP($id: ID!)
+    {
+        resendOTP(id: $id)
+        {
+            id
+        }
+    }
+`;
+
 
 const REGISTER = gql `
   mutation register($name: String, $email: String, $phone: String)
@@ -67,7 +77,7 @@ const CLASSES = gql`
 class Signup extends Component
 {
     state = {
-        id:"cjlarb4hbfb0d0b46fggw6vmy",
+        id:"cjlkdxrn91wc30b72zh68r8lx",
         step: 1,
         qualification: '',
         gender: '',
@@ -78,6 +88,7 @@ class Signup extends Component
         number: '',
         age: '',
         exp: '',
+        resend: false,
         price: ''
     }
     renderStep1 = () =>
@@ -192,8 +203,36 @@ class Signup extends Component
                 </div>
 
                 <hr />
-                    <button type="submit" className="btn btn-primary btn-block">Confirm OTP</button>
-
+                <Mutation mutation={RESEND_OTP}>
+                {(resendOTP, { data }) => (  
+                    <div className="row justify-content-around">
+                    <button type="submit" className="m-1 col-lg-7 col-md-8 col-sm-12 btn btn-primary">Confirm</button>
+                    <a href="#" className="m-1 col-lg-4 col-md-4 col-sm-12 btn btn-warning" onClick={(e) => {
+                        e.preventDefault();
+                        console.log(this.state.id)
+                        console.log(resendOTP)
+                        if(!this.state.resend)
+                        resendOTP({variables:{id: this.state.id}}).then((resp)=> {
+                            this.setState({resend: true})
+                            console.log('resent')
+                        }).catch((err)=>{
+                            console.log(err)
+                            if(err.graphQLErrors[0])
+                            Alert.error(err.graphQLErrors[0].message, {
+                                position: 'top-right',
+                                effect: 'slide',
+                                timeout: 3000
+                            });
+                            else
+                            Alert.error('Something went wrong', {
+                                position: 'top-right',
+                                effect: 'slide',
+                                timeout: 3000
+                            });
+                        })
+                    }}>Resend OTP</a>
+                    </div>)}
+                </Mutation>
             </form>)}
             </Mutation>
             </div>
