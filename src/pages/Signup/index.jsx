@@ -85,7 +85,7 @@ class Signup extends Component
         btn_label: 30,
         btnTimeout: 30000,
         id:"cjlrngqdk70ww0b12nz9bgock",
-        step: 3,
+        step: 1,
         qualification: '',
         gender: '',     
         classes: [],
