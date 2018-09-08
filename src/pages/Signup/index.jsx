@@ -75,12 +75,19 @@ const CLASSES = gql`
   
 
 class Signup extends Component
-{
+{   constructor(props){
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+}
+    
     state = {
-        id:"cjlkdxrn91wc30b72zh68r8lx",
-        step: 1,
+        sendOTPState: false,
+        btn_label: 30,
+        btnTimeout: 30000,
+        id:"cjlrngqdk70ww0b12nz9bgock",
+        step: 3,
         qualification: '',
-        gender: '',
+        gender: '',     
         classes: [],
         profession: '',
         name: '',
@@ -89,8 +96,37 @@ class Signup extends Component
         age: '',
         exp: '',
         resend: false,
-        price: ''
+        price: '',
+        btn_state: true
     }
+
+    componentDidMount(){
+       this.timeOut();
+    }
+
+    handleClick(){
+        this.setState({btn_state: true, btn_label: 'Resend OTP (' + 30 +')'});
+        this.timeOut()
+    }
+
+    currentTime = 0;
+    timeOut(){
+        this.currentTime = 0;
+        var interval = setInterval(()=>{
+            this.currentTime++;
+            this.setState({btn_label: 'Resend OTP (' + (((this.state.btnTimeout)/1000) - this.currentTime)+ ')'})
+            
+
+            if(this.currentTime >= (this.state.btnTimeout/1000))
+            {
+                this.setState({btn_label: 'Resend OTP'})
+                clearInterval(this.state.intervalID);
+            }
+        }, 1000);
+        this.setState({intervalID: interval})
+        setTimeout(()=>{this.setState({btn_state: false});}, this.state.btnTimeout);
+    }
+
     renderStep1 = () =>
     {
         return (<div className="row h-100 justify-content-center align-items-center">
@@ -105,6 +141,7 @@ class Signup extends Component
             {(register, { data }) => (
             <form style={{background: '#fff',padding: '5%', borderRadius: '10px', width:'100%'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
+                this.setState({sendOTPState: true})
                 register({variables:{name: this.state.name, email: this.state.email, phone: this.state.number}}).then((resp)=> {
                     this.setState({step:2, id: resp.data.register.id})
                 }).catch((err)=>{
@@ -149,7 +186,7 @@ class Signup extends Component
                 </div>  
 
                     <hr />
-                    <button className="btn btn-primary btn-block" type="submit">Send OTP</button>
+                    <button className="btn btn-primary btn-block" disabled={this.state.sendOTPState} type="submit">Send OTP</button>
 
             </form>
             )}
@@ -207,10 +244,11 @@ class Signup extends Component
                 {(resendOTP, { data }) => (  
                     <div className="row justify-content-around">
                     <button type="submit" className="m-1 col-lg-7 col-md-8 col-sm-12 btn btn-primary">Confirm</button>
-                    <a href="#" className="m-1 col-lg-4 col-md-4 col-sm-12 btn btn-warning" onClick={(e) => {
+                    <button href="#" className="m-1 col-lg-4 col-md-4 col-sm-12 btn btn-warning" 
+                                     disabled={this.state.btn_state} 
+                                     onClick={(e) => {
                         e.preventDefault();
-                        console.log(this.state.id)
-                        console.log(resendOTP)
+                        this.handleClick(e)
                         if(!this.state.resend)
                         resendOTP({variables:{id: this.state.id}}).then((resp)=> {
                             this.setState({resend: true})
@@ -230,7 +268,7 @@ class Signup extends Component
                                 timeout: 3000
                             });
                         })
-                    }}>Resend OTP</a>
+                    }}>{this.state.btn_label}</button>
                     </div>)}
                 </Mutation>
             </form>)}
@@ -280,7 +318,7 @@ class Signup extends Component
                 if(this.state.qualification == '')
                 {
                     error = true;
-                    Alert.error('Select your Qualification!', {
+                    Alert.error('Specify your Qualification!', {
                         position: 'top-right',
                         effect: 'slide',
                         timeout: 3000
@@ -290,7 +328,7 @@ class Signup extends Component
                 if(this.state.exp == '')
                 {
                     error = true;
-                    Alert.error('Enter Your Experience!', {
+                    Alert.error('Enter Your Experience (years)', {
                         position: 'top-right',
                         effect: 'slide',
                         timeout: 3000
@@ -319,21 +357,18 @@ class Signup extends Component
                 if(this.state.price == '')
                 {
                     error = true;
-                    Alert.error('Enter price for 12 classes!', {
+                    Alert.error('Enter price for 12 classes (per month)!', {
                         position: 'top-right',
                         effect: 'slide',
                         timeout: 3000
                     });
                 }
 
-
-
-
                 var d = {
                     id: this.state.id,
                     age: this.state.age,
                     gender: this.state.gender.value,
-                    qualification: this.state.qualification.value,
+                    qualification: this.state.qualification,
                     profession: this.state.profession.value,
                     tutoringExp: this.state.exp,
                     classesTaught: this.state.classes.map(e => {return e.value}),
@@ -397,28 +432,15 @@ class Signup extends Component
 
                 <div className="form-group">
                 <label for="qual"><b>Qualification</b></label>
-                <Query query={QUALIFICATION}>
-                    {({ loading, error, data }) => {
-                    if (loading) return "Loading...";
-                    if (error) return `Error! ${error.message}`;
-
-                    var qualifications = data.getQualifications.map(e => ({label: e.name, value: e.id}))
-
-                    return (
-                        <Select
-                            value={this.state.qualification}
-                            onChange={(val) => {this.setState({qualification: val})}}
-                            options={qualifications}
-                        />
-                    );
-                    }}
-                </Query>
+                <textarea className="form-control" rows={10} placeholder="Specify your qualification here in detail." name="qual" value={this.state.qualification} onChange={(e) => {
+                    this.setState({qualification: e.target.value})
+                }}/>
                 </div>
 
                 <hr />
                 
                 <div className="form-group">
-                <label for="exp"><b>Tutoring Experience</b></label>
+                <label for="exp"><b>Tutoring Experience (years)</b></label>
                 <input className="form-control"  type="number" placeholder="Enter Experience." name="exp" value={this.state.exp} onChange={(e) => {
                     this.setState({exp: e.target.value})
                 }}/>
@@ -474,7 +496,7 @@ class Signup extends Component
                 <hr />
 
                 <div className="form-group">
-                <label for="price"><b>Price for 12 Tuition Classes</b></label>
+                <label for="price"><b>Price for 12 Tuition Classes (per month)</b></label>
                 <input className="form-control" type="number" placeholder="Enter Price." value={this.state.price} name="price" onChange={(e) => {
                     this.setState({price: e.target.value})
                 }}/>
