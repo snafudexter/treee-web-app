@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 
 const httpLink = createHttpLink({
-  uri: 'https://159.89.173.174/'
+  uri: 'https://service.treee.in/'
 });
 
 const authLink = setContext((_, { headers }) => {
