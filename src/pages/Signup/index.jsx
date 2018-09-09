@@ -5,10 +5,11 @@ import Alert from 'react-s-alert';
 import { Mutation, Query } from "react-apollo";
 
 const UPDATE_DATA = gql`
-    mutation updateUserData($id: ID!, $age: Int, $gender: String, $qualification: ID!, $tutoringExp: Float, $profession: ID!, $classesTaught: [ID], $pricePerAnnum: Int){
+    mutation updateUserData($id: ID!, $age: Int, $gender: String, $qualification: String!, $tutoringExp: Float, $profession: ID!, $classesTaught: [ID], $pricePerAnnum: Int){
         updateUserData(id: $id, age: $age, gender: $gender, qualification: $qualification, tutoringExp: $tutoringExp, profession: $profession, classesTaught: $classesTaught, pricePerAnnum: $pricePerAnnum)
         {
             id
+            refferal
         }
     }
 `;
@@ -81,10 +82,11 @@ class Signup extends Component
 }
     
     state = {
+        registerState: false,
         sendOTPState: false,
         btn_label: 30,
         btnTimeout: 30000,
-        id:"cjlrngqdk70ww0b12nz9bgock",
+        id:"cjltpvzsen8n80b12qfnlttno",
         step: 1,
         qualification: '',
         gender: '',     
@@ -295,6 +297,7 @@ class Signup extends Component
                 e.preventDefault();
 
                 var error = false;
+                
 
                 if(this.state.age == '')
                 {
@@ -379,15 +382,17 @@ class Signup extends Component
                 console.log(d)
                 console.log(error)
                 
-                if(!error)
-                updateUserData({variables:d}).then((resp)=> {
-                    console.log(resp)
-                    this.setState({step:4})
-                }).catch((err)=>{
-                    console.log('error')
-                    console.log(err)
+                if(!error){
+                    this.setState({registerState: true})
+                    updateUserData({variables:d}).then((resp)=> {
+                        console.log(resp)
+                        this.setState({step:4})
+                    }).catch((err)=>{
+                        console.log('error')
+                        console.log(err)
 
-                })
+                    })
+                }
             }} >
                 
                 <h2>Step 3</h2>
@@ -483,7 +488,7 @@ class Signup extends Component
 
                     return (
                         <Select
-                            isMulti={true}
+                            isMulti={true}      
                             value={this.state.classes}
                             onChange={(val) => {this.setState({classes: val})}}
                             options={classes}
@@ -503,7 +508,7 @@ class Signup extends Component
                 </div>
 
                 <hr />
-                <button type="submit" className="btn btn-primary btn-block">Register</button>
+                <button type="submit" disabled={this.state.registerState} className="btn btn-primary btn-block">Register</button>
                
             </form>)}
             </Mutation>
