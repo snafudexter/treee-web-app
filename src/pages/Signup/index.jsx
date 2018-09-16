@@ -9,7 +9,6 @@ const UPDATE_DATA = gql`
         updateUserData(id: $id, age: $age, gender: $gender, qualification: $qualification, tutoringExp: $tutoringExp, profession: $profession, classesTaught: $classesTaught, pricePerAnnum: $pricePerAnnum)
         {
             id
-            refferal
         }
     }
 `;
@@ -36,9 +35,9 @@ const RESEND_OTP = gql`
 
 
 const REGISTER = gql `
-  mutation register($name: String, $email: String, $phone: String)
+  mutation register($name: String, $email: String, $phone: String, $refferal: String)
   {
-      register(name: $name, email: $email, phone: $phone)
+      register(name: $name, email: $email, phone: $phone, refferal: $refferal)
       {
           id
       }
@@ -80,7 +79,6 @@ class Signup extends Component
     super(props);
     this.handleClick = this.handleClick.bind(this);
 }
-    
     state = {
         registerState: false,
         sendOTPState: false,
@@ -144,9 +142,11 @@ class Signup extends Component
             <form style={{background: '#fff',padding: '5%', borderRadius: '10px', width:'100%'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
                 this.setState({sendOTPState: true})
-                register({variables:{name: this.state.name, email: this.state.email, phone: this.state.number}}).then((resp)=> {
-                    this.setState({step:2, id: resp.data.register.id})
+                register({variables:{name: this.state.name, email: this.state.email, phone: this.state.number, refferal: this.state.refferal}}).then(async (resp)=> {
+                    await this.setState({step:2, id: resp.data.register.id})
+                    
                 }).catch((err)=>{
+                    this.setState({sendOTPState: false})
                     console.log(err)
                     if(err.graphQLErrors[0])
                     Alert.error(err.graphQLErrors[0].message, {
@@ -166,23 +166,30 @@ class Signup extends Component
                 <h2>Step 1</h2>
                 <p>Please fill in this form.</p>
                 <hr />
+
+                <div className="form-group">
+                <label for="name"><b>Refferal</b></label>
+                <input className="form-control" type="text" placeholder="99999 99999" value={this.state.refferal} name="refferal" onChange={(e) => {
+                    this.setState({refferal: e.target.value})
+                }}/>
+                </div>
                 
                 <div className="form-group">
                 <label for="name"><b>Name</b></label>
-                <input className="form-control" type="text" placeholder="Example: John Doe" value={this.state.name} name="name" required onChange={(e) => {
+                <input className="form-control" type="text" placeholder="John Doe" value={this.state.name} name="name" required onChange={(e) => {
                     this.setState({name: e.target.value})
                 }}/>
                 </div>
                 <div className="form-group">
                 <label for="email"><b>Email</b></label>
-                <input className="form-control" type="text" placeholder="Example: xxx@xyz.com" value={this.state.email} name="email" required onChange={(e) => {
+                <input className="form-control" type="text" placeholder="xxx@xyz.com" value={this.state.email} name="email" required onChange={(e) => {
                     this.setState({email: e.target.value})
                 }}/>
                 </div>
 
                 <div className="form-group">
                 <label for="mobile"><b>Mobile</b></label>
-                <input className="form-control" type="number" placeholder="Example: 99999 99999" value={this.state.number} name="mobile" required onChange={(e) => {
+                <input className="form-control" type="number" placeholder="99999 99999" value={this.state.number} name="mobile" required onChange={(e) => {
                     this.setState({number: e.target.value})
                 }}/>
                 </div>  
@@ -213,8 +220,8 @@ class Signup extends Component
             
             <form style={{background: '#fff',padding: '5%', borderRadius: '10px', width: '100%'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
-                confirmOTP({variables:{id: this.state.id, otp: this.state.otp}}).then((resp)=> {
-                    this.setState({step:3})
+                confirmOTP({variables:{id: this.state.id, otp: this.state.otp}}).then(async(resp)=> {
+                    await this.setState({step:3})
                 }).catch((err)=>{
                     console.log(err)
                     if(err.graphQLErrors[0])
