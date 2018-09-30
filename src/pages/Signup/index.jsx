@@ -168,28 +168,32 @@ class Signup extends Component
                 <hr />
 
                 <div className="form-group">
-                <label for="name"><b>Refferal</b></label>
+                <label htmlFor="name"><b>Refferal</b></label>
                 <input className="form-control" type="text" placeholder="99999 99999" value={this.state.refferal} name="refferal" onChange={(e) => {
+                    e.preventDefault();
                     this.setState({refferal: e.target.value})
                 }}/>
                 </div>
                 
                 <div className="form-group">
-                <label for="name"><b>Name</b></label>
+                <label htmlFor="name"><b>Name</b></label>
                 <input className="form-control" type="text" placeholder="John Doe" value={this.state.name} name="name" required onChange={(e) => {
+                    e.preventDefault();
                     this.setState({name: e.target.value})
                 }}/>
                 </div>
                 <div className="form-group">
-                <label for="email"><b>Email</b></label>
+                <label htmlFor="email"><b>Email</b></label>
                 <input className="form-control" type="text" placeholder="xxx@xyz.com" value={this.state.email} name="email" required onChange={(e) => {
+                    e.preventDefault();
                     this.setState({email: e.target.value})
                 }}/>
                 </div>
 
                 <div className="form-group">
-                <label for="mobile"><b>Mobile</b></label>
+                <label htmlFor="mobile"><b>Mobile</b></label>
                 <input className="form-control" type="number" placeholder="99999 99999" value={this.state.number} name="mobile" required onChange={(e) => {
+                    e.preventDefault();
                     this.setState({number: e.target.value})
                 }}/>
                 </div>  
@@ -218,7 +222,7 @@ class Signup extends Component
             <Mutation mutation={CONFIRM_OTP}>
             {(confirmOTP, { data }) => (
             
-            <form style={{background: '#fff',padding: '5%', borderRadius: '10px', width: '100%'}} className="shadow-lg align-self-center" onSubmit={(e) => {
+            <form autoComplete="off" style={{background: '#fff',padding: '5%', borderRadius: '10px', width: '100%'}} className="shadow-lg align-self-center" onSubmit={(e) => {
                 e.preventDefault();
                 confirmOTP({variables:{id: this.state.id, otp: this.state.otp}}).then(async(resp)=> {
                     await this.setState({step:3})
@@ -238,12 +242,14 @@ class Signup extends Component
                     });
                 })
             }}>
+            <input type="hidden" value="prayer" />
                 <h2>Step 2</h2>
                 <p>Please Confirm OTP.</p>
                 <hr />
                 <div className="form-group">
-                <label for="email"><b>OTP</b></label>
+                <label htmlFor="otp"><b>OTP</b></label>
                 <input className="form-control" type="number" placeholder="Enter OTP." value={this.state.otp} name="otp" required onChange={(e) => {
+                    e.preventDefault();
                     this.setState({otp: e.target.value})
                 }}/>
                 </div>
@@ -306,7 +312,7 @@ class Signup extends Component
                 var error = false;
                 
 
-                if(this.state.age == '')
+                if(this.state.age === '')
                 {
                     error = true;
                     Alert.error('Enter Your Age!', {
@@ -316,7 +322,7 @@ class Signup extends Component
                     });
                 }
 
-                if(this.state.gender == '')
+                if(this.state.gender === '')
                 {
                     error = true;
                     Alert.error('Select your Gender!', {
@@ -325,7 +331,7 @@ class Signup extends Component
                         timeout: 3000
                     });
                 }
-                if(this.state.qualification == '')
+                if(this.state.qualification === '')
                 {
                     error = true;
                     Alert.error('Specify your Qualification!', {
@@ -335,7 +341,7 @@ class Signup extends Component
                     });
                 }
 
-                if(this.state.exp == '')
+                if(this.state.exp === '')
                 {
                     error = true;
                     Alert.error('Enter Your Experience (years)', {
@@ -345,7 +351,7 @@ class Signup extends Component
                     });
                 }
 
-                if(this.state.profession == '')
+                if(this.state.profession === '')
                 {
                     error = true;
                     Alert.error('Select your Profession!', {
@@ -355,7 +361,7 @@ class Signup extends Component
                     });
                 }
 
-                if(this.state.classes == [])
+                if(this.state.classes === [])
                 {
                     error = true;
                     Alert.error('Select Classes that you can teach!', {
@@ -364,7 +370,7 @@ class Signup extends Component
                         timeout: 3000
                     });
                 }
-                if(this.state.price == '')
+                if(this.state.price === '')
                 {
                     error = true;
                     Alert.error('Enter price for 12 classes (per month)!', {
@@ -407,31 +413,31 @@ class Signup extends Component
                 <hr />
 
                 <div className="form-group">
-                <label for="name"><b>Name</b></label>
+                <label htmlFor="name"><b>Name</b></label>
                 <input className="form-control" type="text" placeholder="Enter Name" value={this.state.name} name="name" disabled />
                 </div>
 
                 <div className="form-group">
-                <label for="email"><b>Email</b></label>
+                <label htmlFor="email"><b>Email</b></label>
                 <input className="form-control" type="text" placeholder="Enter Email" value={this.state.email} name="email" disabled />
                 </div>
 
                  <div className="form-group">
-                <label for="mobile"><b>Mobile</b></label>
+                <label htmlFor="mobile"><b>Mobile</b></label>
                 <input className="form-control" type="number" placeholder="Enter Mobile No." value={this.state.number} name="mobile" disabled />
                 </div>
 
                 <hr />
 
                 <div className="form-group">
-                <label for="age"><b>Age</b></label>
+                <label htmlFor="age"><b>Age</b></label>
                 <input className="form-control" type="number" placeholder="Enter Age." value={this.state.age} name="age" autoFocus onChange={(e) => {
                     this.setState({age: e.target.value})
                 }}/>
                 </div>
 
                 <div className="form-group">
-                <label for="gender"><b>Gender</b></label>
+                <label htmlFor="gender"><b>Gender</b></label>
                 <Select
                     value={this.state.gender}
                     onChange={(val) => {this.setState({gender: val})}}
@@ -443,7 +449,7 @@ class Signup extends Component
                 <hr />
 
                 <div className="form-group">
-                <label for="qual"><b>Qualification</b></label>
+                <label htmlFor="qual"><b>Qualification</b></label>
                 <textarea className="form-control" rows={10} placeholder="Specify your qualification here in detail." name="qual" value={this.state.qualification} onChange={(e) => {
                     this.setState({qualification: e.target.value})
                 }}/>
@@ -452,14 +458,14 @@ class Signup extends Component
                 <hr />
                 
                 <div className="form-group">
-                <label for="exp"><b>Tutoring Experience (years)</b></label>
+                <label htmlFor="exp"><b>Tutoring Experience (years)</b></label>
                 <input className="form-control"  type="number" placeholder="Enter Experience." name="exp" value={this.state.exp} onChange={(e) => {
                     this.setState({exp: e.target.value})
                 }}/>
                 </div>
 
                 <div className="form-group">
-                <label for="ct"><b>Profession</b></label>
+                <label htmlFor="ct"><b>Profession</b></label>
                 <br />
 
                   <Query query={PROFESSIONS}>
@@ -483,7 +489,7 @@ class Signup extends Component
                 <hr />
 
                 <div className="form-group">
-                <label for="ct"><b>Classes Taught</b></label>
+                <label htmlFor="ct"><b>Classes Taught</b></label>
                 <br />
 
                 <Query query={CLASSES}>
@@ -508,7 +514,7 @@ class Signup extends Component
                 <hr />
 
                 <div className="form-group">
-                <label for="price"><b>Price for 12 Tuition Classes (per month)</b></label>
+                <label htmlFor="price"><b>Price for 12 Tuition Classes (per month)</b></label>
                 <input className="form-control" type="number" placeholder="Enter Price." value={this.state.price} name="price" onChange={(e) => {
                     this.setState({price: e.target.value})
                 }}/>
@@ -548,6 +554,7 @@ class Signup extends Component
         if(this.state.step == '1')
             return (<div className="container h-100">{this.renderStep1()} <Alert stack={{limit: 3}} /></div>)
 
+        console.log(this.state)
         if(this.state.step == '2')
             return (<div className="container h-100">{this.renderStep2()} <Alert stack={{limit: 3}} /> </div>)
 
