@@ -543,7 +543,7 @@ class Signup extends Component
         <h1>Thank you!</h1>
         <h4>We will get back to you shortly</h4>
         <hr />
-        <h3>Tell your friends about us too. Your refferal code is <span>{this.state.number}</span>, share this with your friends and get refferal points</h3>
+        <h3>Tell your friends about us too. Your refferal code is <span style={{fontWeight: "bold"}}>{this.state.number}</span>, share this with your friends and get refferal points</h3>
         </div>
         </div>
         </div></div>)
